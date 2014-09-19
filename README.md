@@ -107,11 +107,11 @@ user.preferences(:emails).reload # => { notifications: 'instant', newsletter: tr
 ```ruby
   newsletter_users = User.with_preference(:email, :newsletter, true) #=> an ActiveRecord::Relation
 ```
-Note: this _will_ include users who have not overriden the default value if the value incidentally matches the defautl value.
+Note: this _will_ include users who have not overriden the default value if the value incidentally matches the default value.
 
 ## Other useful stuff
 
-### Defaults
+### Single preference definition
 * Get your preference definition (as per your .yml) as a hash: ``UserPreferences.definitions``
 * Get the definition for a single preference:
 ```ruby
@@ -120,7 +120,7 @@ Note: this _will_ include users who have not overriden the default value if the 
   preference.binary? # => false
   preference.permitted_values # => ['off', 'instant', 'daily', 'weekly']
 ```
-* Retrieve the default preference state with ``UserPreferences.defaults``. You can also scope it down to a category: ``UserPreferences.defaults(:emails)``
+* Retrieve the default preference state with ``UserPreferences.defaults``. You can also scope to a category: ``UserPreferences.defaults(:emails)``
 
 ## Testing
 
