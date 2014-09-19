@@ -1,0 +1,19 @@
+hobbies:
+  outdoors: true
+  cultural: false
+
+food:
+  vegetarian: false
+  a_la_carte: true
+  courses:
+    default: 2
+    values:
+      - 1
+      - 2
+      - 3
+  wine:
+    default: red
+    values:
+      - red
+      - white
+
