@@ -14,7 +14,7 @@ module UserPreferences
 
   class << self
     def [](category, name)
-      if pref = definitions[category].try(:[], name)
+      unless (pref = definitions[category].try(:[], name)).nil?
         PreferenceDefinition.new(pref, category, name)
       end
     end
