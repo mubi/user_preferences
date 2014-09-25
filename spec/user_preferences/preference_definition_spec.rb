@@ -74,5 +74,17 @@ describe UserPreferences::PreferenceDefinition do
         expect(preference.default).to eq(false)
       end
     end
+
+    describe '#to_db' do
+      it 'casts true/false strings to booleans' do
+        expect(preference.to_db('false')).to eq(0)
+        expect(preference.to_db('true')).to eq(1)
+      end
+
+      it 'casts integers to booleans' do
+        expect(preference.to_db(0)).to eq(0)
+        expect(preference.to_db(1)).to eq(1)
+      end
+    end
   end
 end
