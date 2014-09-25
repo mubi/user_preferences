@@ -53,7 +53,7 @@ module UserPreferences
         result = true
         begin
           yield
-        rescue
+        rescue ActiveRecord::RecordInvalid
           result = false
         end
         result
