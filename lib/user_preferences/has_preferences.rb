@@ -22,13 +22,13 @@ module UserPreferences
         scope = select('users.*, p.id as preference_id')
         join = %Q{
           %s join #{UserPreferences::Preference.table_name} p
-          on p.category = '#{category}' and p.name = '#{name}' and p.value = '#{db_value}'
+          on p.category = '#{category}' and p.name = '#{name}'
           and user_id = #{self.table_name}.id
         }
         if value != definition.default
-          scope.joins(join % 'inner')
+          scope.joins(join % 'inner').where("p.value = #{db_value}")
         else
-          scope.joins(join % 'left').where("p.value = '#{db_value}' or preference_id is null")
+          scope.joins(join % 'left').where("p.value = #{db_value} or p.id is null")
         end
       end
     end

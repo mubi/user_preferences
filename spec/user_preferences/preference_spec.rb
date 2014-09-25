@@ -21,7 +21,7 @@ describe UserPreferences::Preference do
 
   it 'must have a value' do
     expect(preference.valid?).to eq(false)
-    expect(preference.errors.full_messages).to include("Value can't be blank")
+    expect(preference.errors.full_messages).to include("Value is not included in the list")
   end
 
   it 'must have a user' do
@@ -39,7 +39,7 @@ describe UserPreferences::Preference do
 
   it 'must have a valid value' do
     expect(preference.valid?).to eq(false)
-    expect(preference.errors.full_messages).to include("Value can't be blank")
+    expect(preference.errors.full_messages).to include("Value is not included in the list")
   end
 
   describe '#update_value' do
