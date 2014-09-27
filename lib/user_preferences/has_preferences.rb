@@ -23,7 +23,7 @@ module UserPreferences
         join = %Q{
           %s join #{UserPreferences::Preference.table_name} p
           on p.category = '#{category}' and p.name = '#{name}'
-          and user_id = #{self.table_name}.id
+          and p.user_id = #{self.table_name}.id
         }
         if value != definition.default
           scope.joins(join % 'inner').where("p.value = #{db_value}")
