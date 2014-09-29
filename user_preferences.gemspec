@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = UserPreferences::VERSION
   spec.authors       = ["Andy Dust"]
   spec.email         = ["adust@mubi.com"]
-  spec.summary       = "User preferences lib."
+  spec.summary       = "User preferences gem for Rails."
   spec.description   = %Q{user_preference is a small library for setting and getting categorized user preferences.
                       Supports both binary and multivalue preferences and default values. }
   spec.homepage      = "http://github.com/mubi/user_preferences"
