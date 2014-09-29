@@ -9,7 +9,7 @@ class CreatePreferences < ActiveRecord::Migration
     end
 
     add_index :preferences, :user_id
-    add_index :preferences, :category
+    add_index :preferences, [:user_id, :category]
     add_index :preferences, [:category, :name, :value]
   end
 
