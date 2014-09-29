@@ -7,6 +7,10 @@ class CreatePreferences < ActiveRecord::Migration
       t.integer :value, null: false
       t.timestamps
     end
+
+    add_index :preferences, :user_id
+    add_index :preferences, :category
+    add_index :preferences, [:category, :name, :value]
   end
 
   def self.down

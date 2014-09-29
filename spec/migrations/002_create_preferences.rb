@@ -8,7 +8,9 @@ class CreatePreferences < ActiveRecord::Migration
       t.timestamps
     end
 
-    # TODO indexes
+    add_index :preferences, :user_id
+    add_index :preferences, :category
+    add_index :preferences, [:category, :name, :value]
   end
 
   def self.down
