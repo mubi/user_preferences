@@ -19,16 +19,15 @@ module UserPreferences
       def self.with_preference(category, name, value)
         definition = UserPreferences[category, name]
         db_value = definition.to_db(value)
-        scope = select('users.*, p.id as preference_id')
         join = %Q{
           %s join #{UserPreferences::Preference.table_name} p
           on p.category = '#{category}' and p.name = '#{name}'
           and p.user_id = #{self.table_name}.id
         }
         if value != definition.default
-          scope.joins(join % 'inner').where("p.value = #{db_value}")
+          joins(join % 'inner').where("p.value = #{db_value}")
         else
-          scope.joins(join % 'left').where("p.value = #{db_value} or p.id is null")
+          joins(join % 'left').where("p.value = #{db_value} or p.id is null")
         end
       end
     end
