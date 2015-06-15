@@ -1,0 +1,7 @@
+language: ruby
+cache: bundler
+rvm:
+  - 2.1.3
+gemfile:
+  - gemfiles/rails_3.gemfile
+  - gemfiles/rails_4.gemfile
