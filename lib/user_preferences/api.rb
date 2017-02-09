@@ -18,6 +18,7 @@ module UserPreferences
         hash.each do |name, value|
           find_or_init_preference(name).update_value!(value)
         end
+        reload
       end
     end
 
@@ -43,7 +44,7 @@ module UserPreferences
     def find_or_init_preference(name)
       unless preference = saved_preferences.detect { |p| p.name == name }
         preference = @scope.find_by_name(name) || @scope.build(name: name, category: @category)
-        saved_preferences << preference
+        preference.save
       end
       preference
     end
