@@ -42,11 +42,7 @@ module UserPreferences
     end
 
     def find_or_init_preference(name)
-      unless preference = saved_preferences.detect { |p| p.name == name }
-        preference = @scope.find_by_name(name) || @scope.build(name: name, category: @category)
-        preference.save
-      end
-      preference
+      @scope.find_or_initialize_by(name: name, category: @category)
     end
 
     def hash_setter(&block)
