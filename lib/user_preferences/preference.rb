@@ -8,11 +8,15 @@ class UserPreferences::Preference < ActiveRecord::Base
   delegate :binary?, :default, :permitted_values, :lookup, :to_db, to: :definition
 
   def update_value!(v)
-    update_attributes!(value: to_db(v))
+    update_attributes!(value: v)
   end
 
   def value
     lookup(attributes['value'])
+  end
+
+  def value=(v)
+    super(to_db(v))
   end
 
   def definition
