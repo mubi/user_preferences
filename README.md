@@ -35,9 +35,27 @@ Finally, run the database migrations:
 $ rake db:migrate
 ```
 
+## Add preferences to your model
+
+Assuming you have a model called `User`, you can associate it with preferences as
+follows:
+
+```ruby
+class User < ActiveRecord::Base
+
+  has_preferences
+
+  # the rest of your code ...
+end
+```
+
+This declaration takes no arguments, and simply sets up the correct associations
+along with making available the rest of the methods described in the _API_ section
+below.
+
 ## Defining preferences
 
-Your preferences are defined in ``config/user_preferences.yml``. You define each of your
+Your preferences, along with their default values, are defined in ``config/user_preferences.yml``. You define each of your
 preferences within a category. This example definition for a binary preference implies that users receive emails notifications by default but not newsletters:
 ```yaml
 emails:
@@ -107,7 +125,7 @@ user.preferences(:emails).reload # => { notifications: 'instant', newsletter: tr
 ```ruby
   newsletter_users = User.with_preference(:email, :newsletter, true) #=> an ActiveRecord::Relation
 ```
-Note: this _will_ include users who have not overriden the default value if the value incidentally matches the default value.
+Note: this _will_ include users who have not overridden the default value if the value incidentally matches the default value.
 
 ## Other useful stuff
 
