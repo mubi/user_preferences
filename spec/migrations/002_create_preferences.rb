@@ -1,11 +1,11 @@
-class CreatePreferences < ActiveRecord::Migration
+class CreatePreferences < (ActiveRecord::VERSION::MAJOR >= 5 ? ActiveRecord::Migration[4.2] : ActiveRecord::Migration)
   def self.up
     create_table :preferences do |t|
       t.integer :user_id, null: false
       t.string  :category, null: false
       t.string  :name, null: false
       t.integer :value, null: false
-      t.timestamps
+      t.timestamps null: false
     end
 
     add_index :preferences, :user_id
