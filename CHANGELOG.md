@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1 2019-10-17
+* Fix compatibility with Rails 6
+* Support modern Ruby versions
+
 ## 1.0.0 2017-02-13
 
 * Fix compatibility with Rails 5
