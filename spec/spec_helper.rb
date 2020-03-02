@@ -16,6 +16,9 @@ RSpec.configure do |config|
   # prevent deprecation warnings
   I18n.enforce_available_locales = true
 
+  config.mock_with :rspec do |mocks|
+    mocks.syntax = [:should, :expect]
+  end
   config.before(:each) { stub_yml }
 end
 
