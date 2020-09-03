@@ -1,7 +1,7 @@
 class UserPreferences::Preference < ActiveRecord::Base
   self.table_name = 'preferences'
   belongs_to :user
-  validates_uniqueness_of :name, scope: [:user_id, :category]
+  validates_uniqueness_of :name, case_sensitive: false, scope: [:user_id, :category]
   validates_presence_of :user_id, :category, :name
   validates :value, inclusion: { in: ->(p) { p.permitted_values }}
 
