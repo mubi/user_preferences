@@ -77,6 +77,22 @@ emails:
   newsletters: false
 ```
 
+Binary preferences can be enhanced to support multiple values while maintaining backwards compatibility on the API side:
+
+```yaml
+emails:
+  notifications:
+    default: true
+    acts_as_binary: true
+    values:
+      - false
+      - true
+      - email
+      - push
+```
+
+This will support setting the preference using integers, booleans, and strings for the first 2 values.
+
 You can add as many categories as you like:
 
 ```yaml

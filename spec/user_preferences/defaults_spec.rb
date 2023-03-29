@@ -16,6 +16,9 @@ describe UserPreferences::Defaults do
             a_la_carte: true,
             courses: 2,
             wine: 'red'
+          },
+          notifications: {
+            followed_user: true
           }
         }
       )
