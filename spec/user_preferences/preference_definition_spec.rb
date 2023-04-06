@@ -87,4 +87,36 @@ describe UserPreferences::PreferenceDefinition do
       end
     end
   end
+
+  context 'non-binary preference acting as binary' do
+    subject(:preference) do
+      definition = UserPreferences.definitions[:notifications][:followed_user]
+      UserPreferences::PreferenceDefinition.new(definition, :notifications, :followed_user)
+    end
+
+    describe '#binary?' do
+      it 'is false' do
+        expect(preference.binary?).to eq(false)
+      end
+    end
+
+    describe '#default' do
+      it 'returns the default preference value' do
+        expect(preference.default).to eq(true)
+      end
+    end
+
+    describe '#to_db' do
+      it 'casts the first 2 values to booleans' do
+        expect(preference.to_db(0)).to eq(0)
+        expect(preference.to_db(1)).to eq(1)
+        expect(preference.to_db(2)).to eq(nil)
+      end
+
+      it 'casts true/false strings to booleans' do
+        expect(preference.to_db('false')).to eq(0)
+        expect(preference.to_db('true')).to eq(1)
+      end
+    end
+  end
 end

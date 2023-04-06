@@ -17,3 +17,12 @@ food:
       - red
       - white
 
+notifications:
+  followed_user:
+    acts_as_binary: true
+    default: true
+    values:
+      - false
+      - true
+      - email
+      - push

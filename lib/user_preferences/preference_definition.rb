@@ -24,12 +24,23 @@ module UserPreferences
       binary? ? @definition : @definition[:default]
     end
 
+    def acts_as_binary?
+      !binary? && @definition[:acts_as_binary] == true
+    end
+
     def lookup(index)
       permitted_values[index] if index
     end
 
     def to_db(value)
-      value = to_bool(value) if binary?
+      value = if binary?
+                to_bool_force(value)
+              elsif acts_as_binary?
+                to_bool_maybe(value)
+              else
+                value
+             end
+
       permitted_values.index(value)
     end
 
@@ -41,7 +52,19 @@ module UserPreferences
 
       return false if value == 0
       return false if value == false || value.blank? || value.to_s =~ (/^(false|f|no|n|0)$/i)
-      raise ArgumentError.new("invalid value for Boolean: \"#{value}\"")
+    end
+
+    def to_bool_force(value)
+      value = to_bool(value)
+      raise ArgumentError.new("invalid value for Boolean: \"#{value}\"") if value.nil?
+
+      value
+    end
+
+    def to_bool_maybe(value)
+      boolean = to_bool(value)
+
+      boolean.nil? ? value : boolean
     end
   end
 end
