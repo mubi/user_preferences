@@ -1,14 +1,7 @@
-appraise "rails-4" do
-  gem "rails", "~> 4"
-  gem "sprockets", "~> 3.7"
-  gem "sqlite3", "~> 1.3.6"
+appraise "rails-8.0" do
+  gem "rails", "~> 8.0.0"
 end
 
-appraise "rails-5" do
-  gem "rails", "~> 5.0"
-  gem "sprockets", "~> 3.7"
-end
-
-appraise "rails-6" do
-  gem "rails", "~> 6.0"
+appraise "rails-8.1" do
+  gem "rails", "~> 8.1.0"
 end

@@ -5,12 +5,8 @@ require 'active_record/connection_adapters/sqlite3_adapter'
 RSpec.configure do |config|
   $stdout = StringIO.new # silence migrations
   ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: ':memory:')
-  if ActiveRecord::VERSION::MAJOR >= 5
-    ActiveRecord::Migrator.migrations_paths = File.expand_path('../migrations', __FILE__)
-    ActiveRecord::Base.connection.migration_context.migrate
-  else
-    ActiveRecord::Migrator.migrate(File.expand_path('../migrations', __FILE__))
-  end
+  migrations_paths = File.expand_path('../migrations', __FILE__)
+  ActiveRecord::MigrationContext.new(migrations_paths).migrate
   $stdout = STDOUT
 
   # prevent deprecation warnings
